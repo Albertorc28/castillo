@@ -1,0 +1,23 @@
+
+$(document).ready(function() {
+    $("#miboton").on('click',function(){
+        var aux=$('#numpersonas').val();
+        $.ajax({
+            url: 'https://randomuser.me/api/?results='+aux,
+            dataType: 'json',
+            success: function(datos) {
+                $('#personas').empty();
+                $.each(datos.results, function(k,v){
+                    $('#personas').append(v.email);
+                    $('#personas').append(' ' + v.name.first);
+                    $('#personas').append(' ' + v.location.city);
+                    $('#personas').append(' ' + v.phone);
+                    $('#personas').append('<img class="rounded-circle" src=" '+ v.picture.thumbnail +' " alt=" ">');
+                    $('#personas').append('<br>');
+                });
+            }
+        });     
+    });
+});
+
+
